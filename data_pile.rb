@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-#= The module which defines interfaces for data piles.
+#= The library for manipulating data piles.
 #
 #Authors::   Bragging Boozer<bragging.boozer@gmail.com>
 #Version::   0.1
@@ -20,14 +20,17 @@
 #You should have received a copy of the GNU General Public License along with
 #this program; if not, see <http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt>.
 
+#= The module which defines interfaces for data piles.
+#
+#Every data pile classes must include this module and override methods.
 module Pile
   #== Fetch a record
   #
-  #===Parameters
+  #=== Parameters
   #none
-  #===Returns
+  #=== Returns
   #a record
-  #===Note
+  #=== Note
   #Fetch a record from the data pile.
   def fetch()
     raise NotImplementedError, "You can not fetch record from this pile."
@@ -35,13 +38,35 @@ module Pile
 
   #== Discard a record
   #
-  #===Parameters
+  #=== Parameters
   #record:: The record which should be deleted.
-  #===Reruens
+  #=== Reruens
   #none
-  #===Note
+  #=== Note
   #Discard a record specified by the user.
   def discard(record)
     raise NotImplementedError, "You can not discard record from this pile."
+  end
+end
+
+#= The module which defines interfaces for records in the pile.
+#
+#User of data pile must define class for records in the pile and include this module in it.
+module Record
+
+  #Key of injected data(The data pile uses this when recoed is discarded).
+  attr_reader :element_key
+
+  #== Inject data to a record
+  #
+  #=== Parameters
+  #key:: key for element data
+  #element:: element data
+  #=== Returns
+  #none
+  #=== Note
+  #The data pile can inject a raw data to a record by this method.
+  def inject(key, element)
+    @element_key = key
   end
 end
