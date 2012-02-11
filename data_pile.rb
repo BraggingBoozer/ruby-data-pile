@@ -106,10 +106,18 @@ class FilePile
     record = @record_class.new
 
     Find.find(@dir).select{|f| FileTest.file?(f)}.each do |f|
-      File.open(f) do |fo|
-        record.inject(File.basename(f), fo)
+      begin
+        File.open(f) do |fo|
+          record.inject(File.basename(f), fo)
+        end
+      rescue
+        next
       end
+
+      return record
     end
+
+    raise RuntimeError, "Effective file is not found."
   end
 
   #== Discard a record
