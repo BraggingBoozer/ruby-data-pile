@@ -82,6 +82,7 @@ class FilePile
   #
   #=== Parameters
   #dir:: pile directory
+  #klass:: class of records in this pile
   #=== Note
   #Create data pile with specified directory.
   def initialize(dir, klass)
