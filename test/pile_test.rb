@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-#= The library for manipulating data piles.
+#= The test module of Pile module.
 #
 #Authors::   Bragging Boozer<bragging.boozer@gmail.com>
 #Version::   0.1
