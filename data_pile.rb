@@ -55,10 +55,10 @@ end
 #
 #User of data pile must define class for records in the pile and include this module in it.
 module Record
-  #Key of injected data(The data pile uses this when recoed is discarded).
+  #Key of loaded data(The data pile uses this when recoed is discarded).
   attr_reader :element_key
 
-  #== Inject data to a record
+  #== Load data to a record
   #
   #=== Parameters
   #key:: key for element data
@@ -66,8 +66,8 @@ module Record
   #=== Returns
   #none
   #=== Note
-  #The data pile can inject a raw data to a record by this method.
-  def inject(key, element)
+  #The data pile can load a raw data to a record by this method.
+  def load(key, element)
     @element_key = key
   end
 end
@@ -109,7 +109,7 @@ class FilePile
     Find.find(@dir).select{|f| FileTest.file?(f)}.each do |f|
       begin
         File.open(f) do |fo|
-          record.inject(File.basename(f), fo)
+          record.load(File.basename(f), fo)
         end
       rescue
         next
@@ -128,7 +128,7 @@ class FilePile
   #=== Reruens
   #none
   #=== Note
-  #Remove an injected file with specified record.
+  #Remove an loaded file with specified record.
   def discard(record)
     File.unlink(@dir + record.element_key)
   end
