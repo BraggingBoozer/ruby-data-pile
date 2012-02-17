@@ -60,7 +60,7 @@ class TC_Record < Test::Unit::TestCase
   #=== Returns
   #none
   #=== Note
-  #Execute function "load" of Record module and ensure attribute "key".
+  #Execute function "load" of Record module and ensure attribute "key" is changed.
   def test_load
     load(1, nil)
 
